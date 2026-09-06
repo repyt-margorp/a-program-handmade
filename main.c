@@ -3,8 +3,7 @@
 
 #define TERM_LAMBDA 1
 #define TERM_APPLICATION 2
-#define TERM_IADT 3
-#define TERM_CONSTRUCTOR 4
+#define TERM_REFERENCE 3
 
 struct term {
 	int tag;
@@ -19,8 +18,8 @@ struct term {
 
 		struct {
 			int sort;
-			struct indexed_algebraic_data_type *p_iadt;
-		} type_system;
+			void *pointer;
+		} reference;
 	} as;
 
 	struct term *next;
@@ -43,6 +42,15 @@ struct indexed_algebraic_data_type {
 struct match {
 	struct term *type;
 	struct term *cases;
+};
+
+#define DATA_TYPE_OBJECT_SORT_TYPE_CONSTRUCTOR 0
+#define DATA_TYPE_OBJECT_SORT_ELEMENT_CONSTRUCTOR 1
+
+struct data_type_object {
+	struct indexed_algebraic_data_type *type;
+
+	int sort;
 };
 
 struct indexed_algebraic_data_type natural_number;
