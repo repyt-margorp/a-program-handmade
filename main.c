@@ -35,7 +35,14 @@ struct indexed_algebraic_data_type {
 
 	int number_of_parameters;
 	int number_of_indices;
+
+	int number_of_constructors;
 	struct constructor *constructors;
+};
+
+struct match {
+	struct term *type;
+	struct term *cases;
 };
 
 struct indexed_algebraic_data_type natural_number;
@@ -43,6 +50,8 @@ int setup_natural_number()
 {
 	natural_number.number_of_parameters = 0;
 	natural_number.number_of_indices = 0;
+
+	natural_number.number_of_constructors = 2;
 	natural_number.constructors = calloc(2, sizeof(struct constructor));
 
 	/* zero */
